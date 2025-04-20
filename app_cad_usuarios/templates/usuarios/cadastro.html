@@ -1,0 +1,188 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VáDeBicicleta</title>
+        <link rel="stylesheet" href="{% static 'app_cad_usuarios/cadastro.css' %}">
+    </head>
+
+    <body>
+    <div class="container">
+        <div class="fundo"></div>
+        <div class="tela-azul">
+        <div class="titulo">VáDeBicicleta</div>
+        
+            <a href="{% url 'home' %}">
+            <img src="{% static 'app_cad_usuarios/seta.png' %}" alt="Voltar" class="seta">
+            </a>
+        
+
+        {% if errors %}
+        <div class="error-messages">
+            <ul>
+                {% for field, error_list in errors.items %}
+                    {% for error in error_list %}
+                        <li>{{ field }}: {{ error }}</li>
+                    {% endfor %}
+                {% endfor %}
+            </ul>
+        </div>
+        {% endif %}
+
+        <form method="POST" action="{% url 'cadastro' %}">
+        {% csrf_token %}
+        
+        <div class="campo">
+            <label for="nome_completo" class="label">NOME COMPLETO</label>
+            <input type="text" name="nome_completo" class="input" placeholder="Insira seu nome completo">
+        </div>
+        
+        <div class="campo">
+            <label for="email" class="label">EMAIL</label>
+            <input type="email" name="email" class="input" placeholder="Insira seu email">
+        </div>
+    
+        <div class="campo">
+            <label for="nome_completo" class="label">TELEFONE</label>
+            <input type="text" name="telefone" id="telefone" class="input" placeholder="Insira seu telefone">
+        </div>
+    
+        <div class="linha-campos">
+            <div class="campo">
+                <label for="cpf" class="label">CPF</label>
+                <input type="tel" name="cpf" id="cpf" class="input" placeholder="Insira seu CPF">
+            </div>
+        
+            <div class="campo">
+                <label for="rg" class="label">RG</label>
+                <input type="tel" name="rg" class="input" placeholder="Insira seu RG">
+            </div>
+        </div>
+
+        <div class="campo">
+            <label for="numero_cartao" class="label">NÚMERO DO CARTÃO</label>
+            <input type="number" name="numero_cartao" id="numero_cartao" class="input" placeholder="Insira o número do cartão" maxlength="16">
+        </div>
+        
+        <div class="linha-campos">
+        <div class="campo">
+            <label for="validade_cartao" class="label">VALIDADE</label>
+            <input type="text" name="validade_cartao" id="validade_cartao" class="input" placeholder="MM/AA">
+        </div>
+        
+        <div class="campo">
+            <label for="cvc" class="label">CVC</label>
+            <input type="number" name="cvc" id="cvc" class="input" placeholder="CVC" maxlength="3">
+        </div>
+        </div>
+
+        <div class="linha-campos">
+        <div class="campo">
+             <label for="senha" class="label">SENHA</label>
+            <input type="password" name="password1" class="input" placeholder="Crie uma senha" maxlength="10">
+        </div>
+        <div class="campo">
+           <label for="confirmar-senha" class="label">CONFIRMAR SENHA</label> 
+            <input type="password" name="password2" class="input" placeholder="Digite a mesma senha" maxlength="10">
+        </div>
+         </div>
+        <div class="campo">
+            <button type="submit" class="botao">SALVAR</button>
+        </div>
+    </form>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // TELEFONE
+            const telInput = document.getElementById("telefone");
+        
+            if (telInput) {
+                telInput.addEventListener("input", function (e) {
+                    let input = e.target.value.replace(/\D/g, "");
+                    if (input.length > 11) input = input.slice(0, 11);
+        
+                    let formatted = "";
+                    if (input.length > 0) {
+                        formatted += "(" + input.slice(0, 2);
+                    }
+                    if (input.length >= 3) {
+                        formatted += ") " + input.slice(2, 7);
+                    }
+                    if (input.length >= 8) {
+                        formatted += "-" + input.slice(7);
+                    }
+                    e.target.value = formatted;
+                });
+        
+                telInput.addEventListener("keydown", function (e) {
+                    if (e.key === "Backspace") {
+                        let val = e.target.value;
+                        if (val.endsWith(")") || val.endsWith(" ") || val.endsWith("-")) {
+                            e.target.value = val.slice(0, -1);
+                        }
+                    }
+                });
+            }
+        
+            // CPF
+            const cpfInput = document.querySelector('input[name="cpf"]');
+        
+            if (cpfInput) {
+                cpfInput.addEventListener('input', function (e) {
+                    let value = e.target.value.replace(/\D/g, '').slice(0, 11);
+        
+                    if (value.length > 9) {
+                        value = value.replace(/(\d{3})(\d{3})(\d{3})(\d{0,2})/, "$1.$2.$3-$4");
+                    } else if (value.length > 6) {
+                        value = value.replace(/(\d{3})(\d{3})(\d{0,3})/, "$1.$2.$3");
+                    } else if (value.length > 3) {
+                        value = value.replace(/(\d{3})(\d{0,3})/, "$1.$2");
+                    }
+        
+                    e.target.value = value;
+                });
+        
+                cpfInput.addEventListener('keydown', function (e) {
+                    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'];
+                    if (!allowedKeys.includes(e.key) && /\D/.test(e.key)) {
+                        e.preventDefault();
+                    }
+                });
+            }
+        
+            // CARTÃO DE CRÉDITO
+            const cartaoInput = document.querySelector('input[name="numero_cartao"]');
+            if (cartaoInput) {
+                cartaoInput.addEventListener('input', function (e) {
+                    let value = e.target.value.replace(/\D/g, '').slice(0, 16);
+                    value = value.replace(/(\d{4})(?=\d)/g, '$1 ');
+                    e.target.value = value.trim();
+                });
+            }
+        
+            // VALIDADE
+            const validadeInput = document.querySelector('input[name="validade_cartao"]');
+            if (validadeInput) {
+                validadeInput.addEventListener('input', function (e) {
+                    let value = e.target.value.replace(/\D/g, '').slice(0, 4);
+                    if (value.length >= 3) {
+                        value = value.replace(/(\d{2})(\d{1,2})/, '$1/$2');
+                    }
+                    e.target.value = value;
+                });
+            }
+        
+            // CVC
+            const cvcInput = document.querySelector('input[name="cvc"]');
+            if (cvcInput) {
+                cvcInput.addEventListener('input', function (e) {
+                    e.target.value = e.target.value.replace(/\D/g, '').slice(0, 3);
+                });
+            }
+        });
+        </script>
+</body>        
+</html>
+ 

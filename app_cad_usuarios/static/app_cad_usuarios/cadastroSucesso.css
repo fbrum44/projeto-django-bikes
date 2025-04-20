@@ -1,0 +1,108 @@
+body, .tela-9 {
+  margin: 0; 
+  padding: 0; 
+  height: 100vh;
+  width: 100vw;
+  background-color: #000000; 
+  position: relative; 
+}
+
+.rectangle-19 {
+  background: #8ccfff;
+  border-radius: 25px;
+  width: 434px;
+  height: 252px;
+  position: absolute;
+  top: 50%; 
+  left: 50%; 
+  transform: translate(-50%, -50%); 
+}
+.seta {
+  position: absolute;
+  top: 20px; 
+  left: 20px;
+  width: 30px;
+  height: auto;
+  cursor: pointer;
+} 
+
+.v-de-bicicleta {
+color: #001580;
+text-align: center;
+font-family: "Roboto-Bold", sans-serif;
+font-size: 25px;
+font-weight: 700;
+position: absolute;
+top: 10%;  
+left: 50%; 
+transform: translateX(-50%);
+width: 100%;
+height: auto;
+}
+.vector {
+width: 18px;
+height: 28px;
+position: absolute;
+left: 458px;
+top: 321px;
+overflow: visible;
+}
+.usu-rio-foi-cadastrado-com-sucesso {
+color: #001580;
+text-align: center;
+font-family: "Roboto-Bold", sans-serif;
+font-size: 23px;
+font-weight: 700;
+position: absolute;
+top: 45%;  
+left: 50%; 
+transform: translateX(-50%);
+width: 100%;
+height: auto;
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+  .rectangle-19 {
+    width: 80%;  
+    top: 25%; /
+  }
+
+  .v-de-bicicleta {
+    font-size: 18px; 
+    top: 30%; 
+  }
+
+  .usu-rio-foi-cadastrado-com-sucesso {
+    font-size: 24px; 
+    top: 55%; 
+  }
+
+  .seta {
+    width: 25px;
+    left: 5px;  
+  }
+}
+
+
+@media (max-width: 480px) {
+  .rectangle-19 {
+    width: 90%; 
+    top: 20%;  
+  }
+
+  .v-de-bicicleta {
+    font-size: 16px; 
+    top: 25%;
+  }
+
+  .usu-rio-foi-cadastrado-com-sucesso {
+    font-size: 20px; 
+    top: 50%; 
+  }
+
+  .seta {
+    width: 20px; 
+    left: 5px;  
+  }
+}

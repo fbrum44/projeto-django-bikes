@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <link rel="stylesheet" href="{% static 'app_cad_usuarios/verHistorico.css' %}">
+    </head>
+    <body>
+        <div class="tela-17">
+          <div class="card">
+            <div class="header">
+              <div class="title">VáDeBicicleta</div>
+            </div>
+            <div class="subtitle">HISTÓRICO</div>
+      
+            <table>
+                <thead>
+                    <tr>
+                        <th>Tipo de Bicicleta</th>
+                        <th>Tempo Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for registro in historico %}
+                    <tr>
+                        <td>{{ registro.tipo_bicicleta }}</td>
+                        <td>{{ registro.tempo }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+            <a href="{% url 'alugarOuDevolver' %}" class="voltar">VOLTAR</a>
+          </div>
+        </div>
+      </body>
+      </html>
+      

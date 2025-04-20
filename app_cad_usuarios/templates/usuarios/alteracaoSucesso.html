@@ -1,0 +1,25 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VáDeBicicleta</title>
+    <link rel="stylesheet" href="{% static 'app_cad_usuarios/cadastroSucesso.css' %}">
+</head>
+
+<body>
+    <div class="tela-9">
+        <div class="rectangle-18"></div>
+        <div class="rectangle-19">
+            <div class="v-de-bicicleta">VáDeBicicleta</div>
+            <a href="{% url 'alugarOuDevolver' %}">
+                <img src="{% static 'app_cad_usuarios/seta.png' %}" alt="Voltar" class="seta">
+            </a>
+            <div class="usu-rio-foi-cadastrado-com-sucesso">
+            OPERAÇÃO REALIZADA COM SUCESSO!
+            </div>
+        </div>
+    </div>     
+</body>

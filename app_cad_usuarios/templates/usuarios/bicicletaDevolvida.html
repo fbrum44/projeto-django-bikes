@@ -1,0 +1,27 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>VáDeBicicleta</title>
+      <link rel="stylesheet" href="{% static 'app_cad_usuarios/bicicletaDevolvida.css' %}">
+    </head>
+     <body>
+<div class="tela-13">
+  <div class="rectangle-6"></div>
+  <div class="rectangle-7"></div>
+  <div class="v-de-bicicleta">VáDeBicicleta</div>
+  <div class="bicicletadevolvida">BICICLETA DEVOLVIDA!</div>
+  
+  <div class="temporizador">Tempo do Aluguel</div>
+  
+  <div class="tempo">{{ tempo_usado }}</div>
+  
+  <a href="{% url 'alugarOuDevolver' %}" class="voltar">VOLTAR</a>
+  
+  <img class="vector" src="vector0.svg" />
+</div>
+<body>
+</html>

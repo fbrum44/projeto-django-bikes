@@ -1,0 +1,39 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>VáDeBicicleta</title>
+      <link rel="stylesheet" href="{% static 'app_cad_usuarios/devolverBicicleta.css' %}">
+    </head>
+     <body>
+        <div class="tela-12">
+            <div class="rectangle-3"></div>
+            <div class="rectangle-4">
+                <a href="{% url 'alugarOuDevolver' %}" class="sair">SAIR</a>
+                <div class="v-de-bicicleta">VáDeBicicleta</div>
+                <div class="rectangle-5"></div>      
+    
+    <div class="codigo-gerado">
+        <p>Tipo de bicicleta: {{ tipo_bicicleta }}</p>
+        <p>código para devolução:</p>
+        <h2>{{ codigo_devolucao }}</h2>
+    </div>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <form method="POST">
+        {% csrf_token %}
+    <div class="devolverbici">DIGITE O CÓDIGO DA BICICLETA PARA DEVOLVER</div>
+        <div id="input-container">
+            <input type="text" name="codigo" id="codigo" placeholder="Digite o código" required>
+        </div>
+        <button type="submit">CONFIRMAR</button>
+    </form>
+    </div> 
+</div>   
+<body>
+</html>
+

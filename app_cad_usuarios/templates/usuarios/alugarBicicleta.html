@@ -1,0 +1,38 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="{% static 'app_cad_usuarios/alugarBicicleta.css' %}">
+  </head>
+
+  <body>
+    <div class="rectangle-4">
+      <div class="v-de-bicicleta">VáDeBicicleta</div>
+      <form method="POST" action="{% url 'alugarBicicleta' %}">
+          {% csrf_token %}          
+          <div class="bikes-container">
+            <div class="bike-card">
+              <img src="{% static 'app_cad_usuarios/bicicletaeletrica.jpg' %}" alt="Bicicleta Elétrica" class="bike-image">
+              <div class="bike-label">ELÉTRICA</div>
+              <button type="submit" name="bicicleta" value="eletrica" class="select-button">SELECIONAR</button>
+          </div>
+          
+            <div class="bike-card">
+              <img src="{% static 'app_cad_usuarios/bicicletapasseio.jpg' %}" alt="Bicicleta Passeio" class="bike-image">
+              <div class="bike-label">PASSEIO</div>
+              <button type="submit" name="bicicleta" value="passeio" class="select-button">SELECIONAR</button>
+          </div>
+          
+            <div class="bike-card">
+              <img src="{% static 'app_cad_usuarios/bicicletaurbana.jpg' %}" alt="Bicicleta Urbana" class="bike-image">
+              <div class="bike-label">URBANA</div>
+              <button type="submit" name="bicicleta" value="urbana" class="select-button">SELECIONAR</button>
+          </div>
+          </div>
+      </form>
+      <a href="{% url 'alugarOuDevolver' %}" class="voltar" style="text-decoration:none">VOLTAR</a>
+  </body>

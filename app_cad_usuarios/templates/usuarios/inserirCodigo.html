@@ -1,0 +1,37 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-BR">
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VáDeBicicleta</title>
+    <link rel="stylesheet" href="{% static 'app_cad_usuarios/inserirCodigo.css' %}">
+    </head>
+    <body>
+    <div class="tela-2">
+    <div class="rectangle-3"></div>
+    <div class="rectangle-4">
+        <p class="codigo-desbloqueio">código gerado: <strong>{{ codigo_desbloqueio }}</strong></p>
+    
+    <a href="{% url 'alugarBicicleta' %}" style="text-decoration: none" class="voltar">VOLTAR</a>
+    <div class="v-de-bicicleta">VáDeBicicleta</div>
+    
+    <div class="digite-o-codigo-da-bicicleta">DIGITE O CÓDIGO DA BICICLETA:</div>
+    
+    <form method="POST" action="{% url 'inserirCodigo' %}">
+        {% csrf_token %}
+        <div class="component-4">
+            <input type="text" id="codigo-bicicleta" name="codigo" placeholder="Insira o código" required>
+        </div>
+        <button type="submit" class="bot-es-prim-rios">
+            <div class="input-text">CONFIRMAR</div>
+        </button>
+    </form>
+    </div>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    </div>
+    </body>
+</html>

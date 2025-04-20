@@ -1,0 +1,44 @@
+
+
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VáDeBicicleta</title>
+    <link rel="stylesheet" href="{% static 'app_cad_usuarios/confirmarExclusao.css' %}">
+</head>
+
+<body>
+    <div class="tela-7">
+        <div class="rectangle-18"></div>
+        <div class="rectangle-19">
+            <div class="v-de-bicicleta">VáDeBicicleta</div>
+              </a>
+            <div class="excluirconta">
+            DESEJA EXCLUIR SUA CONTA?
+            </div>
+            {% if messages %}
+            <ul>
+                {% for message in messages %}
+                    <li>{{ message }}</li>
+                {% endfor %}
+            </ul>
+                {% endif %}
+                <form method="POST" action="{% url 'confirmarExclusao' %}">
+                {% csrf_token %}
+                <button type="submit" class="bot-es-prim-rios">SIM</button>
+            </form>
+                <div class="bot-es-prim-rios2">
+                    <a href="{% url 'alterarCadastro' %}" class="input-text">NÃO</a>
+            </form>
+                </div>
+        </div>           
+            </div>
+    </div>     
+</body>
+
+
+

@@ -1,0 +1,44 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil</title>
+    <link rel="stylesheet" href="{% static 'app_cad_usuarios/alterarCadastro.css' %}">
+  </head>
+  <body>
+    <div class="tela-4">
+        <div class="rectangle-8"></div>
+        
+        <div class="rectangle-9">
+            
+            <h1 class="v-de-bicicleta">VáDeBicicleta</h1>
+            <h2 class="meu-perfil">MEU PERFIL</h2>
+            <a href="{% url 'alugarOuDevolver' %}" class="seta-link">
+              <img src="{% static 'app_cad_usuarios/seta.png' %}" alt="Voltar" class="seta">
+            </a>         
+            <form method="POST" action="{% url 'alterarCadastro' %}">
+                {% csrf_token %}
+                
+                {{ form.as_p }}
+                {% if errors %}
+                  <ul>
+                      {% for field, error in errors.items %}
+                          <li>{{ field }}: {{ error|join:", " }}</li>
+                      {% endfor %}
+                  </ul>
+                 {% endif %}
+                <button type="submit" class="bot-es-prim-rios">
+                    <span class="input-text">CONFIRMAR EDIÇÃO</span>
+                </button>
+            </form>
+            <button type="button" class="bot-es-prim-rios2">
+              <a href="{% url 'confirmarExclusao' %}" style="color: white; text-decoration: none;">EXCLUIR PERFIL</a>
+          </button>
+          
+        </div>
+    </div>
+    </body>
+</html>
