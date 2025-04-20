@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -20,12 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-8_q0-$dz#(tm6=9mn@x630pw=syk%8#f==u_j=hbo*eptfir0u'
+SECRET_KEY = os.environ.get('DJANGO_SECRET_KEY', 'chave-padrao-insegura')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['localhost', '127.0.0.1']
 
 
 # Application definition
@@ -126,6 +127,6 @@ AUTH_USER_MODEL = 'app_cad_usuarios.CustomUser'
 
 SESSION_ENGINE = 'django.contrib.sessions.backends.db'  
 SESSION_COOKIE_NAME = 'sessionid' 
-SESSION_COOKIE_SECURE = False  
-CSRF_COOKIE_SECURE = False    
+SESSION_COOKIE_SECURE = True  
+CSRF_COOKIE_SECURE = True    
 SESSION_COOKIE_AGE = 1209600 
